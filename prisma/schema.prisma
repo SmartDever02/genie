@@ -29,9 +29,12 @@ model scores {
 
 model maps {
   id            Int           @id @default(autoincrement())
-  uid           Int
   challangeType ChallengeType @default(ACCURACY)
   htmlIndex     Int
+  indexes       Int[]
+  avgScores     Float[]
+
+  @@unique([htmlIndex, challangeType]) // Composite unique constraint
 }
 
 enum ChallengeType {

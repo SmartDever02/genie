@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { z } from 'zod'
 
-const MinerSchema = z.object({
+const Schema = z.object({
   htmlIndex: z.number(),
   content: z.string(),
 })
@@ -10,7 +10,7 @@ const MinerSchema = z.object({
 export async function POST(req: Request) {
   try {
     const jsonData = await req.json()
-    const parsedData = MinerSchema.safeParse(jsonData)
+    const parsedData = Schema.safeParse(jsonData)
 
     if (!parsedData.success) {
       return NextResponse.json(
