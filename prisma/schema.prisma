@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model payloads {
+  id           Int    @id @default(autoincrement())
+  htmlIndex    Int
+  variantIndex Int
+  content      String @db.Text
+}
+
+model scores {
+  id                   Int     @id @default(autoincrement())
+  groundTruthHtmlIndex Int
+  visualScores         Float[]
+  lighthouseScores     Float[]
+}
+
+model maps {
+  id            Int           @id @default(autoincrement())
+  uid           Int
+  challangeType ChallengeType @default(ACCURACY)
+  htmlIndex     Int
+}
+
+enum ChallengeType {
+  ACCURACY
+  LIGHTHOUSE
+  BALANCED
+}
