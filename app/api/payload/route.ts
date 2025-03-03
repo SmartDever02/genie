@@ -21,13 +21,11 @@ export async function POST(req: Request) {
 
     const { htmlIndex, content } = parsedData.data
 
-    const variantCount = (
-      await prisma.payloads.findMany({
-        where: {
-          htmlIndex,
-        },
-      })
-    ).length
+    const variantCount = await prisma.payloads.count({
+      where: {
+        htmlIndex,
+      },
+    })
 
     const newPayload = await prisma.payloads.create({
       data: {
