@@ -13,6 +13,8 @@ model payloads {
   htmlIndex    Int
   variantIndex Int
   content      String @db.Text
+
+  @@unique([htmlIndex, variantIndex]) // Composite unique constraint
 }
 
 model scores {
@@ -21,6 +23,8 @@ model scores {
   groundTruthHtmlIndex Int
   visualScores         Float[]
   lighthouseScores     Float[]
+
+  @@unique([groundTruthHtmlIndex, htmlIndex]) // Composite unique constraint
 }
 
 model maps {
