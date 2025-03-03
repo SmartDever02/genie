@@ -17,6 +17,7 @@ model payloads {
 
 model scores {
   id                   Int     @id @default(autoincrement())
+  htmlIndex            Int
   groundTruthHtmlIndex Int
   visualScores         Float[]
   lighthouseScores     Float[]
