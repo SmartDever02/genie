@@ -13,7 +13,7 @@ export async function GET(
       },
     })
 
-    return NextResponse.json({ success: true, data: payloads })
+    return NextResponse.json({ success: true, length: payloads.length, data: payloads })
   } catch (error) {
     console.error('Error getting html payloads for htmlIndex:', error)
     return NextResponse.json(
