@@ -11,9 +11,17 @@ export default async function PayloadAnalytics() {
     },
   })
 
+  const total = result
+    .map((item) => item._count.variantIndex)
+    .reduce((total, item) => total + item)
+
   return (
     <section className="w-fit border border-gray-300 p-5 rounded-md">
-      <p className='pb-1 font-semibold'>Payloads</p>
+      <p className="pb-1">
+        <b className="font-semibold">{result.length} HTML Payloads ({total})</b>
+        <br />
+        <span className="text-sm leading-4">HTML payloads generated</span>
+      </p>
       <ul className="max-h-[600px] overflow-y-auto">
         {result.map((item) => (
           <li

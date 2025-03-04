@@ -21,6 +21,13 @@ export async function POST(req: Request) {
 
     const { htmlIndex, content } = parsedData.data
 
+    if (!content) {
+      return NextResponse.json(
+        { error: "Bad request: content shouldn't be empty" },
+        { status: 400 }
+      )
+    }
+
     console.log('html index', htmlIndex)
 
     const variantCount = await prisma.payloads.count({

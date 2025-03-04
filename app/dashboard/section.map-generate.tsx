@@ -42,9 +42,6 @@ export default function MapGeneration() {
 
   return (
     <div>
-      <label className="block pb-1 font-semibold" htmlFor="html_index">
-        Generate maps
-      </label>
       <div className="flex flex-col gap-2">
         <input
           className="w-full bg-white/10 px-2 placeholder:text-sm"
