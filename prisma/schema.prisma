@@ -42,11 +42,9 @@ model maps {
 
 model imagehash {
   id        Int    @id @default(autoincrement())
-  htmlIndex Int
+  htmlIndex Int    @unique
   imageHash String
   taskId    String @unique @default("")
-
-  @@unique([htmlIndex]) // Composite unique constraint
 }
 
 model logs {
