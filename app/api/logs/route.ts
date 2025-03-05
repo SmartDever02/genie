@@ -7,6 +7,7 @@ const Schema = z.object({
   challengeType: z.string().optional(),
   base64Image: z.string().optional(),
   imageHash: z.string().optional(),
+  imageSize: z.number().optional(),
   logType: z.enum([LogType.SYNAPSE]),
 })
 
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
       )
     }
 
-    const { challengeType, imageHash, base64Image, logType } = parsedData.data
+    const { challengeType, imageHash, base64Image, logType, imageSize } = parsedData.data
 
     const log = await prisma.logs.create({
       data: {
@@ -38,6 +39,7 @@ export async function POST(req: Request) {
         logType,
         imageHash,
         base64Image,
+        imageSize,
         timestamp: new Date(),
       },
     })

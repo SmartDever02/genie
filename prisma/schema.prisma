@@ -44,6 +44,7 @@ model imagehash {
   id        Int    @id @default(autoincrement())
   htmlIndex Int
   imageHash String
+  imageSize Int    @default(0)
 
   @@unique([htmlIndex]) // Composite unique constraint
 }
@@ -51,6 +52,7 @@ model imagehash {
 model logs {
   id            Int      @id @default(autoincrement())
   imageHash     String?
+  imageSize     Int?
   base64Image   String?  @db.Text
   challengeType String?
   logType       LogType  @default(SYNAPSE)
