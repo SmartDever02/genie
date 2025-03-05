@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     const newPayload = await prisma.payloads.create({
       data: {
         htmlIndex,
-        content,
+        content: content.replace('{"complex_html":"', '').replace(/"}$/, ''),
         variantIndex: variantCount,
         model,
       },

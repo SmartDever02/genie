@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function MapGeneration() {
-  const router = useRouter();
+  const router = useRouter()
 
   const [index, setIndex] = useState<number>(Infinity)
   const [isPending, setIsPending] = useState<boolean>(false)
@@ -31,7 +31,7 @@ export default function MapGeneration() {
       }
 
       alert('success!')
-      router.refresh();
+      router.refresh()
     } catch (e) {
       alert('Failed to generate map for html index: ' + index)
     } finally {

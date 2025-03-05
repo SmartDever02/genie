@@ -1,3 +1,4 @@
+import CalculateAll from '@/components/client.score'
 import prisma from '@/lib/prisma'
 
 export default async function Scores() {
@@ -37,6 +38,7 @@ export default async function Scores() {
           </li>
         ))}
       </ul>
+      <CalculateAll />
     </section>
   )
 }
