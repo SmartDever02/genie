@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 
-export const TOTAL_HTML_COUNT = 484
+const TOTAL_HTML_COUNT = 484
 
 export async function GET() {
   try {
