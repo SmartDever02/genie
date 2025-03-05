@@ -35,8 +35,8 @@ export default async function ScoreMap() {
               {item.challangeType}
             </span>
             <span className="text-sm">
-              Max: {item.avgScores[0].toFixed(3)}, Min:{' '}
-              {item.avgScores.at(-1)?.toFixed(3)}
+              Max: <b className='font-semibold'>{item.avgScores[0].toFixed(3)}</b>, Min:{' '}
+              <b className='font-semibold'>{item.avgScores.at(-1)?.toFixed(3)}</b>
             </span>
           </li>
         ))}
