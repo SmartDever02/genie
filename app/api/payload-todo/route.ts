@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'
 
 export const TOTAL_HTML_COUNT = 484
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const result = await prisma.payloads.groupBy({
       by: ['htmlIndex'],
