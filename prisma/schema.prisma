@@ -31,7 +31,7 @@ model scores {
 
 model maps {
   id            Int           @id @default(autoincrement())
-  model                GPTModel @default(GPT4o)
+  model         GPTModel      @default(GPT4o)
   challangeType ChallengeType @default(ACCURACY)
   htmlIndex     Int
   indexes       Int[]
@@ -45,7 +45,7 @@ model imagehash {
   htmlIndex Int
   imageHash String
 
-  @@unique([htmlIndex, imageHash]) // Composite unique constraint
+  @@unique([htmlIndex]) // Composite unique constraint
 }
 
 model logs {

@@ -28,11 +28,10 @@ export async function POST(req: Request) {
       )
     }
 
-    const newHash = await prisma.imagehash.create({
-      data: {
-        htmlIndex,
-        imageHash: hash,
-      },
+    const newHash = await prisma.imagehash.upsert({
+      where: { htmlIndex }, // Check if htmlIndex exists
+      update: { imageHash: hash }, // Update imageHash if found
+      create: { htmlIndex, imageHash: hash }, // Create new record if not found
     })
 
     return NextResponse.json({ success: true, data: newHash })
