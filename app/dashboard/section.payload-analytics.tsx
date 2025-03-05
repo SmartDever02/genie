@@ -1,3 +1,4 @@
+import PayloadTodo from '@/components/payload.todo'
 import prisma from '@/lib/prisma'
 
 export default async function PayloadAnalytics() {
@@ -18,11 +19,13 @@ export default async function PayloadAnalytics() {
   return (
     <section className="w-fit border border-gray-300 p-5 rounded-md">
       <p className="pb-1">
-        <b className="font-semibold">{result.length} HTML Payloads ({total})</b>
+        <b className="font-semibold">
+          {result.length} HTML Payloads ({total})
+        </b>
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
       </p>
-      <ul className="max-h-[600px] overflow-y-auto">
+      <ul className="max-h-[600px] overflow-y-auto mb-5">
         {result.map((item) => (
           <li
             key={item.htmlIndex}
@@ -42,6 +45,8 @@ export default async function PayloadAnalytics() {
           </li>
         ))}
       </ul>
+
+      <PayloadTodo htmlIndexes={result.map((item) => item.htmlIndex)} />
     </section>
   )
 }

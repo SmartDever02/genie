@@ -37,6 +37,14 @@ model maps {
   @@unique([htmlIndex, challangeType]) // Composite unique constraint
 }
 
+model imagehash {
+  id        Int    @id @default(autoincrement())
+  htmlIndex Int
+  imageHash String
+
+  @@unique([htmlIndex, imageHash]) // Composite unique constraint
+}
+
 enum ChallengeType {
   ACCURACY
   LIGHTHOUSE
