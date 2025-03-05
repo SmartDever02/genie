@@ -44,7 +44,7 @@ model imagehash {
   id        Int    @id @default(autoincrement())
   htmlIndex Int
   imageHash String
-  taskId    String @default("")
+  taskId    String @unique @default("")
 
   @@unique([htmlIndex]) // Composite unique constraint
 }
