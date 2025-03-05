@@ -45,8 +45,21 @@ model imagehash {
   @@unique([htmlIndex, imageHash]) // Composite unique constraint
 }
 
+model logs {
+  id            Int      @id @default(autoincrement())
+  imageHash     String?
+  base64Image   String?  @db.Text
+  challengeType String?
+  logType       LogType  @default(SYNAPSE)
+  timestamp     DateTime @default(now())
+}
+
 enum ChallengeType {
   ACCURACY
   LIGHTHOUSE
   BALANCED
+}
+
+enum LogType {
+  SYNAPSE
 }

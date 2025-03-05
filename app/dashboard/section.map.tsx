@@ -14,10 +14,10 @@ export default async function ScoreMap() {
   })
 
   return (
-    <section className="rounded border border-gray-400 min-w-80 w-fit p-5">
+<section className="rounded border border-gray-400 min-w-80 w-fit p-5">
       <p className="pb-1">
         <b className="font-semibold">
-          HTML maps
+          {maps.length} HTML maps
         </b>
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
