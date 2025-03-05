@@ -5,7 +5,6 @@ import { LogType } from '@prisma/client'
 
 const Schema = z.object({
   challengeType: z.string().optional(),
-  base64Image: z.string().optional(),
   imageHash: z.string().optional(),
   taskId: z.string(),
   logType: z.enum([LogType.SYNAPSE]),
@@ -31,16 +30,30 @@ export async function POST(req: Request) {
       )
     }
 
-    const { challengeType, imageHash, base64Image, logType, taskId } =
-      parsedData.data
+    const { challengeType, imageHash, logType, taskId } = parsedData.data
+
+    const payload = await prisma.imagehash.findUnique({
+      where: {
+        taskId,
+      },
+    })
+
+    const payloadLength = payload?.htmlIndex
+      ? await prisma.payloads.count({
+          where: {
+            htmlIndex: payload?.htmlIndex,
+          },
+        })
+      : 0
 
     const log = await prisma.logs.create({
       data: {
         challengeType,
         logType,
         imageHash,
-        base64Image,
         taskId,
+        htmlIndex: payload?.htmlIndex || undefined,
+        currentPayloadCount: payloadLength,
         timestamp: new Date(),
       },
     })

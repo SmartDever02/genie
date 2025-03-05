@@ -48,13 +48,14 @@ model imagehash {
 }
 
 model logs {
-  id            Int      @id @default(autoincrement())
-  taskId        String   @default("")
-  imageHash     String?
-  base64Image   String?  @db.Text
-  challengeType String?
-  logType       LogType  @default(SYNAPSE)
-  timestamp     DateTime @default(now())
+  id                  Int      @id @default(autoincrement())
+  taskId              String   @default("")
+  htmlIndex           Int?
+  currentPayloadCount Int?
+  imageHash           String?
+  challengeType       String?
+  logType             LogType  @default(SYNAPSE)
+  timestamp           DateTime @default(now())
 }
 
 enum ChallengeType {
