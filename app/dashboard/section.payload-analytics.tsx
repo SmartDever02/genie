@@ -46,7 +46,7 @@ export default async function PayloadAnalytics() {
         ))}
       </ul>
 
-      <PayloadTodo htmlIndexes={result.map((item) => item.htmlIndex)} />
+      <PayloadTodo />
     </section>
   )
 }

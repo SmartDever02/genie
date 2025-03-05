@@ -1,10 +1,6 @@
 'use client'
 
-interface PropsType {
-  htmlIndexes: number[]
-}
-
-export default function PayloadTodo(props: PropsType) {
+export default function PayloadTodo() {
   const handler = async () => {
     try {
       const res = await fetch(`/api/payload-todo`)
