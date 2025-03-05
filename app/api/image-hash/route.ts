@@ -5,6 +5,7 @@ import { z } from 'zod'
 const Schema = z.object({
   htmlIndex: z.number(),
   hash: z.string(),
+  taskId: z.string(),
 })
 
 export async function POST(req: Request) {
@@ -19,9 +20,9 @@ export async function POST(req: Request) {
       )
     }
 
-    const { htmlIndex, hash } = parsedData.data
+    const { htmlIndex, hash, taskId } = parsedData.data
 
-    if (!hash) {
+    if (!hash || !taskId) {
       return NextResponse.json(
         { error: "Bad request: hash shouldn't be empty" },
         { status: 400 }
@@ -30,8 +31,8 @@ export async function POST(req: Request) {
 
     const newHash = await prisma.imagehash.upsert({
       where: { htmlIndex }, // Check if htmlIndex exists
-      update: { imageHash: hash }, // Update imageHash if found
-      create: { htmlIndex, imageHash: hash }, // Create new record if not found
+      update: { imageHash: hash, taskId }, // Update imageHash if found
+      create: { htmlIndex, imageHash: hash, taskId }, // Create new record if not found
     })
 
     return NextResponse.json({ success: true, data: newHash })
