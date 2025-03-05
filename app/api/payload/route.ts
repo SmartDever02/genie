@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { z } from 'zod'
+import { GPTModel } from '@prisma/client'
 
 const Schema = z.object({
   htmlIndex: z.number(),
   content: z.string(),
+  model: z.enum([GPTModel.GPT4o, GPTModel.GPT4oMini]).optional(),
 })
 
 export async function POST(req: Request) {
@@ -19,7 +21,7 @@ export async function POST(req: Request) {
       )
     }
 
-    const { htmlIndex, content } = parsedData.data
+    const { htmlIndex, content, model } = parsedData.data
 
     if (!content) {
       return NextResponse.json(
@@ -28,21 +30,18 @@ export async function POST(req: Request) {
       )
     }
 
-    console.log('html index', htmlIndex)
-
     const variantCount = await prisma.payloads.count({
       where: {
         htmlIndex,
       },
     })
 
-    console.log('variant count: ', variantCount)
-
     const newPayload = await prisma.payloads.create({
       data: {
         htmlIndex,
         content,
         variantIndex: variantCount,
+        model,
       },
     })
 

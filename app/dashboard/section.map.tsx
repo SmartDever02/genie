@@ -14,11 +14,9 @@ export default async function ScoreMap() {
   })
 
   return (
-<section className="rounded border border-gray-400 min-w-80 w-fit p-5">
+    <section className="rounded border border-gray-400 min-w-80 w-fit p-5">
       <p className="pb-1">
-        <b className="font-semibold">
-          {maps.length} HTML maps
-        </b>
+        <b className="font-semibold">{maps.length} HTML maps</b>
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
       </p>
@@ -35,8 +33,12 @@ export default async function ScoreMap() {
               {item.challangeType}
             </span>
             <span className="text-sm">
-              Max: <b className='font-semibold'>{item.avgScores[0].toFixed(3)}</b>, Min:{' '}
-              <b className='font-semibold'>{item.avgScores.at(-1)?.toFixed(3)}</b>
+              Max:{' '}
+              <b className="font-semibold">{item.avgScores[0].toFixed(3)}</b>,
+              Min:{' '}
+              <b className="font-semibold">
+                {item.avgScores.at(-1)?.toFixed(3)}
+              </b>
             </span>
           </li>
         ))}

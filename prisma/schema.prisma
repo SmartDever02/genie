@@ -9,16 +9,18 @@ datasource db {
 }
 
 model payloads {
-  id           Int    @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   htmlIndex    Int
   variantIndex Int
-  content      String @db.Text
+  content      String   @db.Text
+  model        GPTModel @default(GPT4o)
 
   @@unique([htmlIndex, variantIndex]) // Composite unique constraint
 }
 
 model scores {
-  id                   Int     @id @default(autoincrement())
+  id                   Int      @id @default(autoincrement())
+  model                GPTModel @default(GPT4o)
   htmlIndex            Int
   groundTruthHtmlIndex Int
   visualScores         Float[]
@@ -29,6 +31,7 @@ model scores {
 
 model maps {
   id            Int           @id @default(autoincrement())
+  model                GPTModel @default(GPT4o)
   challangeType ChallengeType @default(ACCURACY)
   htmlIndex     Int
   indexes       Int[]
@@ -62,4 +65,9 @@ enum ChallengeType {
 
 enum LogType {
   SYNAPSE
+}
+
+enum GPTModel {
+  GPT4o
+  GPT4oMini
 }
