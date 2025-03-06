@@ -1,16 +1,17 @@
-import prisma from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 
-export default async function Scores() {
-  const scores = await prisma.scores.groupBy({
-    by: ['htmlIndex'],
+export default async function Scores({
+  scores,
+}: {
+  scores: (Prisma.PickEnumerable<
+    Prisma.ScoresGroupByOutputType,
+    'htmlIndex'[]
+  > & {
     _count: {
-      groundTruthHtmlIndex: true,
-    },
-    orderBy: {
-      htmlIndex: 'asc',
-    },
-  })
-
+      groundTruthHtmlIndex: number
+    }
+  })[]
+}) {
   const total = scores
     .map((item) => item._count.groundTruthHtmlIndex)
     .reduce((total, item) => total + item, 0)

@@ -1,17 +1,14 @@
-import prisma from '@/lib/prisma'
+import { ChallengeType } from '@prisma/client'
 
-export default async function Overview() {
-  const maps = await prisma.maps.findMany({
-    select: {
-      htmlIndex: true,
-      challangeType: true,
-      avgScores: true,
-    },
-    orderBy: {
-      htmlIndex: 'asc',
-    },
-  })
-
+export default async function Overview({
+  maps,
+}: {
+  maps: {
+    challangeType: ChallengeType
+    htmlIndex: number
+    avgScores: number[]
+  }[]
+}) {
   const maxAvg =
     maps.map((item) => item.avgScores[0]).reduce((sum, item) => sum + item, 0) /
     maps.length
@@ -30,9 +27,13 @@ export default async function Overview() {
       </p>
       <hr className="my-3 border-dashed border-gray-400" />
 
-      <span className='text-base'>Max Average: <b className='font-semibold'>{maxAvg.toFixed(6)}</b></span>
+      <span className="text-base">
+        Max Average: <b className="font-semibold">{maxAvg.toFixed(6)}</b>
+      </span>
       <br />
-      <span className='text-base'>Min Average: <b className='font-semibold'>{minAvg.toFixed(6)}</b></span>
+      <span className="text-base">
+        Min Average: <b className="font-semibold">{minAvg.toFixed(6)}</b>
+      </span>
     </section>
   )
 }
