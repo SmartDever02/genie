@@ -63,9 +63,23 @@ export default async function Scores({
               <b className="font-semibold">
                 {item._count.groundTruthHtmlIndex}
               </b>
-              {
-                payload?._count.variantIndex === item._count.groundTruthHtmlIndex || item._count.groundTruthHtmlIndex >=10 ? "(Full)" : "(Partial)"
-              }
+              <span
+                title={
+                  payload?._count.variantIndex ===
+                  item._count.groundTruthHtmlIndex
+                    ? 'Full Scores'
+                    : item._count.groundTruthHtmlIndex >= 10
+                    ? 'Enough Scores'
+                    : 'Not Enough'
+                }
+              >
+                {payload?._count.variantIndex ===
+                item._count.groundTruthHtmlIndex
+                  ? '🌕'
+                  : item._count.groundTruthHtmlIndex >= 10
+                  ? '🌖'
+                  : '🌘'}
+              </span>
             </li>
           )
         })}
