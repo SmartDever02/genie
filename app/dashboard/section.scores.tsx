@@ -1,7 +1,9 @@
+'use client'
+
 import { ChallengeType, Prisma } from '@prisma/client'
 import toast from 'react-hot-toast'
 
-export default async function Scores({
+export default function Scores({
   scores,
   maps,
   payloads,
