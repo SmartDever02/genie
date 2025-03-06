@@ -36,6 +36,9 @@ export default async function ScoreMap({
             (element) => element.htmlIndex === item.htmlIndex
           )
 
+          const max = item.avgScores[0]
+          const min = item.avgScores.at(-1) || 0
+
           return (
             <li
               className={`py-1 px-2 rounded-md flex gap-x-2 items-center hover:bg-white/10 transition-all duration-150 text-base`}
@@ -57,10 +60,12 @@ export default async function ScoreMap({
               </span>
               <span className="text-sm">
                 Max:{' '}
-                <b className="font-semibold">{item.avgScores[0].toFixed(3)}</b>,
-                Min:{' '}
-                <b className="font-semibold">
-                  {item.avgScores.at(-1)?.toFixed(3)}
+                <b className={`font-semibold ${max >= 0.9 ? "text-red-800" : max >= 0.85 ? "text-orange-700" : max >=0.75 ? "text-orange-300" : "text-black bg-white"}`}>
+                  {max.toFixed(3)}
+                </b>
+                , Min:{' '}
+                <b className={`font-semibold ${min >= 0.9 ? "text-red-800" : min >= 0.85 ? "text-orange-700" : min >=0.75 ? "text-orange-300" : "text-black bg-white"}`}>
+                  {min.toFixed(3)}
                 </b>
               </span>
             </li>
