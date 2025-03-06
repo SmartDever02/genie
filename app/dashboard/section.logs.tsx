@@ -1,7 +1,16 @@
+import { unstable_cache } from "next/cache";
 import prisma from '@/lib/prisma'
 
+const getLogsCached = unstable_cache(
+  async () => {
+    return await prisma.logs.findMany();
+  },
+  ["logs"], // Cache key
+  { revalidate: 60 } // Revalidate every 60 seconds
+);
+
 export default async function Logs() {
-  const logs = await prisma.logs.findMany()
+  const logs = await getLogsCached();
 
   return (
     <section className="rounded border border-gray-400 min-w-80 w-fit p-5">

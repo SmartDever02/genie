@@ -29,10 +29,10 @@ export default async function Overview() {
         <span className="text-sm leading-4">General Dataset Overview</span>
       </p>
       <hr className="my-3 border-dashed border-gray-400" />
-      
-      <span className='text-base'>Max Average: <b className='font-semibold'>{maxAvg.toFixed(3)}</b></span>
+
+      <span className='text-base'>Max Average: <b className='font-semibold'>{maxAvg.toFixed(6)}</b></span>
       <br />
-      <span className='text-base'>Min Average: <b className='font-semibold'>{minAvg.toFixed(3)}</b></span>
+      <span className='text-base'>Min Average: <b className='font-semibold'>{minAvg.toFixed(6)}</b></span>
     </section>
   )
 }
