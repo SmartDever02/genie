@@ -25,6 +25,7 @@ export default async function PayloadAnalytics() {
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
       </p>
+      <hr className="my-3 border-dashed border-gray-400" />
       <ul className="max-h-[600px] overflow-y-auto mb-5">
         {result.map((item) => (
           <li

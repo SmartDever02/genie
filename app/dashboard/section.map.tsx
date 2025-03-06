@@ -21,6 +21,7 @@ export default async function ScoreMap() {
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
       </p>
+      <hr className="my-3 border-dashed border-gray-400" />
       <MapGeneration />
       <hr className="my-3 border-dashed border-gray-400" />
       <ul className="max-h-[500px] overflow-y-auto mb-5">

@@ -23,10 +23,16 @@ export default async function Overview() {
 
   return (
     <section className="w-fit border border-gray-300 p-5 rounded-md">
-      <h3 className='font-semibold pb-1'>Overview</h3>
-      Max Average: {maxAvg.toFixed(3)}
+      <p className="pb-1">
+        <b className="font-semibold">Overview</b>
+        <br />
+        <span className="text-sm leading-4">General Dataset Overview</span>
+      </p>
+      <hr className="my-3 border-dashed border-gray-400" />
+      
+      <span className='text-base'>Max Average: <b className='font-semibold'>{maxAvg.toFixed(3)}</b></span>
       <br />
-      Min Average: {minAvg.toFixed(3)}
+      <span className='text-base'>Min Average: <b className='font-semibold'>{minAvg.toFixed(3)}</b></span>
     </section>
   )
 }

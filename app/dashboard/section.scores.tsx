@@ -26,6 +26,7 @@ export default async function Scores() {
           Count of scores for each html_index
         </span>
       </p>
+      <hr className="my-3 border-dashed border-gray-400" />
       <ul className="max-h-[600px] overflow-y-auto">
         {scores.map((item) => (
           <li
