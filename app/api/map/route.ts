@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'
 import { generateScoreMap } from '@/service/generate-score-map'
 import { ChallengeType } from '@prisma/client'
 
-export async function GET() {
+export async function POST() {
   try {
     const scores = await prisma.scores.groupBy({
       by: ['htmlIndex'],

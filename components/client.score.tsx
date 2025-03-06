@@ -8,7 +8,9 @@ export default function CalculateAll() {
 
   const handler = async () => {
     try {
-      const res = await fetch(`/api/map`)
+      const res = await fetch(`/api/map`, {
+        method: 'POST',
+      })
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`)
       }
