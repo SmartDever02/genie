@@ -24,9 +24,9 @@ export default async function Overview() {
   return (
     <section className="w-fit border border-gray-300 p-5 rounded-md">
       <h3 className='font-semibold pb-1'>Overview</h3>
-      Max Average: {maxAvg}
+      Max Average: {maxAvg.toFixed(3)}
       <br />
-      Min Average: {minAvg}
+      Min Average: {minAvg.toFixed(3)}
     </section>
   )
 }

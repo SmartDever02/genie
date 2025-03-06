@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import MapGeneration from './section.map-generate'
+import CalculateAll from '@/components/client.score'
 
 export default async function ScoreMap() {
   const maps = await prisma.maps.findMany({
@@ -22,7 +23,7 @@ export default async function ScoreMap() {
       </p>
       <MapGeneration />
       <hr className="my-3 border-dashed border-gray-400" />
-      <ul className="max-h-[500px] overflow-y-auto">
+      <ul className="max-h-[500px] overflow-y-auto mb-5">
         {maps.map((item) => (
           <li
             className={`py-1 px-2 rounded-md flex gap-x-2 items-center hover:bg-white/10 transition-all duration-150 text-base`}
@@ -43,6 +44,7 @@ export default async function ScoreMap() {
           </li>
         ))}
       </ul>
+      <CalculateAll />
     </section>
   )
 }

@@ -23,6 +23,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
+      length: scores.length
     })
   } catch (error) {
     console.error('Error getting html payloads for htmlIndex:', error)

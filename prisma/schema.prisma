@@ -52,6 +52,7 @@ model logs {
   taskId              String   @default("")
   htmlIndex           Int?
   currentPayloadCount Int?
+  expectedScore       Float?
   imageHash           String?
   challengeType       String?
   logType             LogType  @default(SYNAPSE)
