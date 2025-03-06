@@ -31,8 +31,8 @@ export default async function Logs() {
             key={item.htmlIndex}
           >
             Task-{item.taskId.substring(0, 8) + '...'}
-            <span className="text-xs font-semibold px-2 py-1 rounded-full bg-green-800">
-              {item.challengeType}
+            <span className="uppercase text-xs font-semibold px-2 py-1 rounded-full bg-green-800">
+              {item.challengeType?.replaceAll("_competition", "")}
             </span>
             <span className='text-sm'>
               Expected Score: <b>{item.expectedScore?.toFixed(3) || 0}</b>

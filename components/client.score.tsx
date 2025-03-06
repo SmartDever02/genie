@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export default function CalculateAll() {
   const router = useRouter()
@@ -11,8 +12,13 @@ export default function CalculateAll() {
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`)
       }
+      const data = await res.json()
+
+      toast.success(
+        `Successfully calculated ${data.length} scores to generate full map!`
+      )
     } catch (e) {
-      alert('Error re-calculating maps')
+      toast.error('Failed to re-calculate scores to generate maps')
     } finally {
       router.refresh()
     }

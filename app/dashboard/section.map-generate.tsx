@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 export default function MapGeneration() {
   const router = useRouter()
@@ -30,10 +31,10 @@ export default function MapGeneration() {
         throw new Error('Failed to generate map')
       }
 
-      alert('success!')
+      toast.success('Successfully generated map for htmlIndex: ' + index)
       router.refresh()
     } catch (e) {
-      alert('Failed to generate map for html index: ' + index)
+      toast.error('Failed to generate map for html index: ' + index)
     } finally {
       setIndex(Infinity)
       setIsPending(false)
@@ -56,7 +57,7 @@ export default function MapGeneration() {
           onClick={handler}
           className="disabled:bg-slate-600 bg-blue-500 hover:bg-blue-400 text-white py-1.5 px-4 rounded text-sm"
         >
-          {isPending ? 'Pending' : 'Generate Map'}
+          {isPending ? 'Pending...' : 'Generate Map'}
         </button>
       </div>
     </div>
