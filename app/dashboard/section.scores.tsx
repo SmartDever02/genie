@@ -1,4 +1,5 @@
 import { ChallengeType, Prisma } from '@prisma/client'
+import toast from 'react-hot-toast'
 
 export default async function Scores({
   scores,
@@ -30,6 +31,21 @@ export default async function Scores({
   const total = scores
     .map((item) => item._count.groundTruthHtmlIndex)
     .reduce((total, item) => total + item, 0)
+
+  const payloadIndexes = payloads.map((item) => item.htmlIndex)
+  const scoreIndexes = scores.map((score) => score.htmlIndex)
+
+  const getMissingIndexHandler = () => {
+    const missingIndexes = payloadIndexes.filter(
+      (index) => !scoreIndexes.includes(index)
+    )
+
+    toast.success(
+      `Found ${missingIndexes.length} missing indexes to calculate score. Copied to the clipboard`
+    )
+
+    window.navigator.clipboard.writeText(missingIndexes.join(','))
+  }
 
   return (
     <section className="w-fit border border-gray-300 p-5 rounded-md">
@@ -84,6 +100,13 @@ export default async function Scores({
           )
         })}
       </ul>
+
+      <button
+        onClick={getMissingIndexHandler}
+        className="disabled:bg-slate-600 bg-blue-500 hover:bg-blue-400 text-white py-1.5 px-4 rounded text-sm"
+      >
+        Get Missing Indexes to score
+      </button>
     </section>
   )
 }
