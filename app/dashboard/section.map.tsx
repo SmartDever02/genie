@@ -51,7 +51,7 @@ export default async function ScoreMap({
                 </span>
               )}
               html_index_{item.htmlIndex}:{' '}
-              <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-green-800">
+              <span className="text-[10px] font-semibold px-2 rounded-full bg-green-800">
                 {item.challangeType}
               </span>
               <span className="text-sm">

@@ -32,7 +32,7 @@ export default async function Home() {
   return (
     <main className="p-10 flex gap-4">
       <PayloadAnalytics />
-      <Scores scores={scores} />
+      <Scores scores={scores} maps={maps} />
       <ScoreMap scores={scores} maps={maps} />
       <Overview maps={maps} />
       <Logs />

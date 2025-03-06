@@ -1,8 +1,14 @@
-import { Prisma } from '@prisma/client'
+import { ChallengeType, Prisma } from '@prisma/client'
 
 export default async function Scores({
   scores,
+  maps,
 }: {
+  maps: {
+    challangeType: ChallengeType
+    htmlIndex: number
+    avgScores: number[]
+  }[]
   scores: (Prisma.PickEnumerable<
     Prisma.ScoresGroupByOutputType,
     'htmlIndex'[]
@@ -29,15 +35,24 @@ export default async function Scores({
       </p>
       <hr className="my-3 border-dashed border-gray-400" />
       <ul className="max-h-[600px] overflow-y-auto">
-        {scores.map((item) => (
-          <li
-            className={`py-1 px-2 rounded-md flex gap-x-2 items-center hover:bg-white/10 transition-all duration-150 text-base`}
-            key={item.htmlIndex}
-          >
-            html_index_{item.htmlIndex}:{' '}
-            <b className="font-semibold">{item._count.groundTruthHtmlIndex}</b>
-          </li>
-        ))}
+        {scores.map((item) => {
+          const map = maps.find(
+            (element) => element.htmlIndex === item.htmlIndex
+          )
+
+          return (
+            <li
+              className={`py-1 px-2 rounded-md flex gap-x-2 items-center hover:bg-white/10 transition-all duration-150 text-base`}
+              key={item.htmlIndex}
+            >
+              <span>{map ? '✅' : '❌'}</span>
+              html_index_{item.htmlIndex}:{' '}
+              <b className="font-semibold">
+                {item._count.groundTruthHtmlIndex}
+              </b>
+            </li>
+          )
+        })}
       </ul>
     </section>
   )
