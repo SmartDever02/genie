@@ -77,7 +77,7 @@ export default async function Scores({
                 item._count.groundTruthHtmlIndex
                   ? '🌕'
                   : item._count.groundTruthHtmlIndex >= 10
-                  ? '🌖'
+                  ? '🌗'
                   : '🌘'}
               </span>
             </li>
