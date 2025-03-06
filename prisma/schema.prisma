@@ -26,6 +26,8 @@ model scores {
   visualScores         Float[]
   lighthouseScores     Float[]
 
+  updatedAt DateTime @default(now())
+
   @@unique([groundTruthHtmlIndex, htmlIndex]) // Composite unique constraint
 }
 

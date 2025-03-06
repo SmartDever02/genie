@@ -37,20 +37,21 @@ export async function POST(
       where: {
         groundTruthHtmlIndex_htmlIndex: {
           groundTruthHtmlIndex: ground_html_index,
-          htmlIndex: Number(params.htmlIndex)
-        }
+          htmlIndex: Number(params.htmlIndex),
+        },
       },
       update: {
         visualScores: accuracy_scores,
-        lighthouseScores: seo_scores
+        lighthouseScores: seo_scores,
+        updatedAt: new Date(),
       },
       create: {
         groundTruthHtmlIndex: ground_html_index,
         htmlIndex: Number(params.htmlIndex),
         visualScores: accuracy_scores,
-        lighthouseScores: seo_scores
-      }
-    });
+        lighthouseScores: seo_scores,
+      },
+    })
 
     return NextResponse.json({
       success: true,
