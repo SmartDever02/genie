@@ -4,7 +4,7 @@ import { generateScoreMap } from '@/service/generate-score-map'
 import { ChallengeType } from '@prisma/client'
 import { z } from 'zod'
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 
 const Schema = z.object({
   min: z.number(),
