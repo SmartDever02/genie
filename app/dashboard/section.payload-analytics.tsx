@@ -1,18 +1,19 @@
 import PayloadTodo from '@/components/payload.todo'
-import prisma from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 
-export default async function PayloadAnalytics() {
-  const result = await prisma.payloads.groupBy({
-    by: ['htmlIndex'],
+export default async function PayloadAnalytics({
+  payloads,
+}: {
+  payloads: (Prisma.PickEnumerable<
+    Prisma.PayloadsGroupByOutputType,
+    'htmlIndex'[]
+  > & {
     _count: {
-      variantIndex: true,
-    },
-    orderBy: {
-      htmlIndex: 'asc',
-    },
-  })
-
-  const total = result
+      variantIndex: number
+    }
+  })[]
+}) {
+  const total = payloads
     .map((item) => item._count.variantIndex)
     .reduce((total, item) => total + item)
 
@@ -20,14 +21,14 @@ export default async function PayloadAnalytics() {
     <section className="w-fit border border-gray-300 p-5 rounded-md">
       <p className="pb-1">
         <b className="font-semibold">
-          {result.length} HTML Payloads ({total})
+          {payloads.length} HTML Payloads ({total})
         </b>
         <br />
         <span className="text-sm leading-4">HTML payloads generated</span>
       </p>
       <hr className="my-3 border-dashed border-gray-400" />
       <ul className="max-h-[600px] overflow-y-auto mb-5">
-        {result.map((item) => (
+        {payloads.map((item) => (
           <li
             key={item.htmlIndex}
             className={`hover:bg-white/10 transition-all duration-150 rounded-sm flex items-center text-base py-1 px-2`}

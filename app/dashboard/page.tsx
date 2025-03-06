@@ -28,11 +28,21 @@ export default async function Home() {
       htmlIndex: 'asc',
     },
   })
+
+  const payloads = await prisma.payloads.groupBy({
+    by: ['htmlIndex'],
+    _count: {
+      variantIndex: true,
+    },
+    orderBy: {
+      htmlIndex: 'asc',
+    },
+  })
   
   return (
     <main className="p-10 flex gap-4">
-      <PayloadAnalytics />
-      <Scores scores={scores} maps={maps} />
+      <PayloadAnalytics payloads={payloads} />
+      <Scores scores={scores} maps={maps} payloads={payloads} />
       <ScoreMap scores={scores} maps={maps} />
       <Overview maps={maps} />
       <Logs />

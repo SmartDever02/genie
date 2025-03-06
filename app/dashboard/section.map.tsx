@@ -41,7 +41,8 @@ export default async function ScoreMap({
               className={`py-1 px-2 rounded-md flex gap-x-2 items-center hover:bg-white/10 transition-all duration-150 text-base`}
               key={item.htmlIndex}
             >
-              {score?._count?.groundTruthHtmlIndex === item.avgScores.length ? (
+              {item.avgScores.length >
+              (score?._count?.groundTruthHtmlIndex || Infinity) - 1 ? (
                 <span className="w-12 text-center px-2 bg-green-800 rounded text-sm">
                   FULL
                 </span>
