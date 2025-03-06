@@ -53,12 +53,26 @@ export async function GET(
         payloads[Math.floor(Math.random() * payloads.length)]
 
       return NextResponse.json({
+        success: true,
+        hasMap: false,
         data: randomPayload.content,
       })
     }
 
+    // if there is a map
+    const subIndex = map.indexes[0]
+
+    const payloads = await prisma.payloads.findMany({
+      where: {
+        htmlIndex: Number(htmlIndex),
+        variantIndex: subIndex,
+      },
+    })
+
     return NextResponse.json({
       success: true,
+      hasMap: !!payloads[subIndex]?.content,
+      data: payloads[subIndex]?.content || payloads[0].content,
     })
   } catch (error) {
     console.error('Error getting html payloads for htmlIndex:', error)
