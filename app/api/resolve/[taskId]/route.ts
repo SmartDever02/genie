@@ -43,9 +43,17 @@ export async function GET(
       })
 
       if (payloads.length < 1) {
+        // No complex payloads generated
+        // Sending pure payloads
+
+        const dataset = await prisma.datasets.findUniqueOrThrow({
+          where: {
+            htmlIndex: Number(htmlIndex),
+          }
+        })
+
         return NextResponse.json(
-          { error: 'No html payloads found' },
-          { status: 404 }
+          { success: true, hasMap: false, data: dataset.content },
         )
       }
 
