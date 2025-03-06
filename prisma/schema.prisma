@@ -8,6 +8,13 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model datasets {
+  id        Int      @id @default(autoincrement())
+  htmlIndex Int      @unique
+  content   String   @db.Text
+  updatedAt DateTime @default(now())
+}
+
 model payloads {
   id           Int      @id @default(autoincrement())
   htmlIndex    Int

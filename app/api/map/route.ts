@@ -5,17 +5,14 @@ import { ChallengeType } from '@prisma/client'
 
 export async function POST() {
   try {
-    const scores = await prisma.scores.groupBy({
-      by: ['htmlIndex'],
-      _count: {
-        groundTruthHtmlIndex: true,
-      },
+    const scores = await prisma.scores.findMany({
       orderBy: {
-        htmlIndex: 'asc',
+        'updatedAt': 'asc'
       },
+      take: 300
     })
 
-    await Promise.all(
+    Promise.all(
       scores.map((score) =>
         generateScoreMap(score.htmlIndex, ChallengeType.ACCURACY)
       )
