@@ -46,6 +46,16 @@ export async function POST(req: Request) {
         })
       : 0
 
+    const expectedScore = payload?.htmlIndex
+      ? (
+          await prisma.maps.findFirst({
+            where: {
+              htmlIndex: Number(payload?.htmlIndex),
+            },
+          })
+        )?.avgScores?.at(0) || 0
+      : 0
+      
     const log = await prisma.logs.create({
       data: {
         challengeType,
@@ -54,6 +64,7 @@ export async function POST(req: Request) {
         taskId,
         htmlIndex: payload?.htmlIndex || undefined,
         currentPayloadCount: payloadLength,
+        expectedScore,
         timestamp: new Date(),
       },
     })
